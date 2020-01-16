@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+  <html>
+        <body>
+		       <h1> Hello JavaScript</h1>
+			   <button type="button" onclick="writeDate()">Try it</button>
+			   <script>
+			           function writeDate(){
+					   document.write(new Date());
+					   }
+			   </script>
+	    </body>
+	</html>

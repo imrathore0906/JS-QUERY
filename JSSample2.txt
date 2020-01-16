@@ -1,0 +1,14 @@
+<html>
+       <head>
+	   </head>
+	   <body>
+	       <p id="txt1"</p> <br>
+		   <p id="txt2"</p>
+		   <script>
+		          var a = [50,80,90,30];
+				  var employee = {name:"sravya", desgination:"analyst", mobile:"9030548457" };
+				  document.getElementById("txt1").innerHTML = a[0];
+				  document.getElementById("txt2").innerHTML = employee.mobile;
+		   </script>
+	   </body>
+</html>

@@ -1,0 +1,104 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head><script>
+			        function validate()
+					{
+					  if(document.loginForm.user.value == "")
+					  {
+						document.getElementById("user").innerHTML="Username can't be empty".fontcolor("red");
+						document.getElementById("pass").innerHTML="";
+						document.loginForm.user.focus();
+						return false;
+					  } 
+					 
+					  if(document.loginForm.user.value != " " && document.loginForm.pass.value == "")
+					  {
+						document.getElementById("user").innerHTML="Password can't be empty".fontcolor("red");
+						document.getElementById("pass").innerHTML="";
+						document.loginForm.pass.focus();
+					    return false;
+					  }
+					 return(true);
+					}
+			</script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+      <form action="validationJSP.jsp" name="loginForm" onsubmit="return(validate());">
+      Enter name<input type="text" name="user"> <span id="user"></span><br>
+      Enter password<input type="text" name="pass"> <p id="pass"></p><br>
+      <input type="submit" value="submit">
+      </form>
+</body>
+</html>
+-------------------------------------------------------------------------------------------------------------------------------------------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+       <h2>Welcome Administrator!</h2>
+	   <a href = Login.jsp>Return to Form</a>
+</body>
+</html>
+----------------------------------------------------------------------------------------------------------------------------------------------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+      <% out.println("Welcome"+request.getParameter("user")); %>
+	  <a href = Login.jsp>Return to Form</a>
+</body>
+</html>
+---------------------------------------------------------------------------------------------------------------------------------------------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+       <% String user = request.getParameter("user");
+	   String pass = request.getParameter("pass");
+	   RequestDispatcher rd = null; 
+	   if(user.equals("admin") && pass.equals("admin")){
+		   rd = request.getRequestDispatcher("Admin.jsp");
+		   //response.sendRedirect("Admin");
+		   rd.include(request, response); %>
+		   <h2>success</h2>
+		   
+	      <% }
+	   else if (user.isEmpty() || pass.isEmpty()){ %>
+		   <font color = red>All fields required</font>
+	      <% rd = request.getRequestDispatcher("Login.jsp");
+	       rd.include(request, response);
+	       }
+	   else if(user.equals("admin") &&  !pass.equals("admin")){  %>
+		  <font color = red>Enter right password</font> 
+	      <% rd = request.getRequestDispatcher("Login.jsp");
+	       rd.include(request, response);
+	   }
+	   else {
+		   rd = request.getRequestDispatcher("User.jsp");
+		   rd.include(request, response); %>
+		   <h2>success</h2>
+	      
+	
+	<%} %>
+       
+</body>
+</html>
